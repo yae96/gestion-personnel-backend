@@ -36,13 +36,13 @@ $message=response( array( "message" => "Wrong Credentials." ), 400 );
         //$customer->last_login = Carbon::now();
         //$customer->save();
         //$token = $customer->createToken('Laravel Password Grant Client')->accessToken;
-        return response( array( "message" => "Sign In Successful", "data" => [
+        return response( array(  "guard" => "stagiaire",
             "Stagiaire" => $Stagiaire,
             
             // Below the customer key passed as the second parameter sets the role
             // anyone with the auth token would have only customer access rights
             "token" => $Stagiaire->createToken('Personal Access Token',['stagiaire'])->accessToken
-        ]  ), 200 );
+    ), 200 );
     } else {
         return $message;
     }
@@ -55,13 +55,13 @@ elseif(Admin::where('email',$email)->count() > 0 ){
         //$customer->last_login = Carbon::now();
         //$customer->save();
         //$token = $customer->createToken('Laravel Password Grant Client')->accessToken;
-        return response( array( "message" => "Sign In Successful", "data" => [
-            "admin" => $admin,
+        return response( array( "guard" => "admin", 
+            "user" => $admin,
             
             // Below the customer key passed as the second parameter sets the role
             // anyone with the auth token would have only customer access rights
             "token" => $admin->createToken('Personal Access Token',['admin'])->accessToken
-        ]  ), 200 );
+         ), 200 );
     } else {
         return $message;
     }}
@@ -73,13 +73,13 @@ elseif(Admin::where('email',$email)->count() > 0 ){
             //$customer->last_login = Carbon::now();
             //$customer->save();
             //$token = $customer->createToken('Laravel Password Grant Client')->accessToken;
-            return response( array( "message" => "Sign In Successful", "data" => [
-                "employe" => $employe,
+            return response( array(  "guard" => "employe",
+                "user" => $employe,
                 
                 // Below the customer key passed as the second parameter sets the role
                 // anyone with the auth token would have only customer access rights
                 "token" => $employe->createToken('Personal Access Token',['employe'])->accessToken
-            ]  ), 200 );
+           ), 200 );
         } else {
             return $message;
         }}
@@ -89,14 +89,9 @@ elseif(Admin::where('email',$email)->count() > 0 ){
 
 }
 public function logout()
-{
-    if(Auth::guard('employe')->check()) {
-        Auth::guard('employe')->user()->AauthAcessToken()->delete();
-     }
-     elseif(Auth::guard('stagiaire')->check()) {
-        //$this->guard('stagiaire')->logout();
-        $this->user('stagiaire')->AauthAcessToken()->delete();
-     }
+{   
+    $token=Auth::user()->token();
+    $token->delete();
     return response()->json([
         'msg' => 'Logged out complete'
     ]);

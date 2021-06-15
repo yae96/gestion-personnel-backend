@@ -19,3 +19,9 @@ Route::get('/logout',[LoginController::class, 'logout'])->name('logout');
 Route::middleware('auth:api')->get('/user', function (Request $request){
     return $request->user();
 });
+Route::get('/test', function()
+{
+return response()->json([
+    'msg' => 'Logged out complete'
+]);
+});

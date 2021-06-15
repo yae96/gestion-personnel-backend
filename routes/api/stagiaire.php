@@ -25,7 +25,7 @@ Route::group(['prefix' => 'employe'],function(){
 Route::group( ['middleware' => ['auth:employe','scope:employe'] ],function(){
       // authenticated customer routes here 
       Route::get('/attestations',[AttestationController::class, 'stagiaire']);
-      Route::get('/logout',[LoginController::class, 'logout']);
+      Route::get('/signout',[LoginController::class, 'logout']);
       Route::get('/stage',[AttestationController::class, 'stage']);
       Route::apiResource('documents',DocumentController::class);
       Route::apiResource('stagiaires',StagiaireController::class)->only(['show','update']);            

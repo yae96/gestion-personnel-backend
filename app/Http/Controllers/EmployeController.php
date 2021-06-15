@@ -106,6 +106,7 @@ class EmployeController extends Controller
         $employe->telephone=$request->telephone;
         if($request->cv_fichier!=null)
         $employe->cv_fichier=$request->cv_fichier;
+        $employe->save();
         return $employe;
     }
 
@@ -119,5 +120,9 @@ class EmployeController extends Controller
     {
         //
         return Employe::destroy($id);
+    }
+    public function getName($id){
+        $employe=Employe::find($id);
+        return $employe->nom;
     }
 }

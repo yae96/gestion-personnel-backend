@@ -124,4 +124,8 @@ class StagiaireController extends Controller
         $stages=Stage::all()->where('stage_id',$stage_id);
         return $stages;
     }
+    public function getName($id){
+        $stagiaire=Stagiaire::find($id);
+        return $stagiaire->nom;
+    }
 }

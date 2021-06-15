@@ -28,7 +28,7 @@ Route::group(['prefix' => 'employe'],function(){
 Route::group( ['middleware' => ['auth:employe','scope:employe'] ],function(){
       // authenticated customer routes here 
    Route::get('/attestation',[AttestationController::class, 'employe']);
-   Route::get('/l',[LoginController::class, 'logout']);
+   Route::get('/signout',[LoginController::class, 'logout']);
    Route::get('/conges',[CongeController::class, 'employe']);
    Route::get('/avances',[AvanceController::class, 'employe']);
    Route::get('/paiements',[PaiementController::class, 'employe']);

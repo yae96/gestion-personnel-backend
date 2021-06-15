@@ -113,4 +113,7 @@ public function find(){
         //
         Admin::destroy($id);
     }
+    public function logout(){
+        
+    }
 }

@@ -31,7 +31,8 @@ Route::group(['prefix' => 'admin'],function(){
 
 Route::group( ['middleware' => ['auth:admin','scope:admin'] ],function(){
        // authenticated admin routes here 
-    Route::get('/logout',[LoginController::class, 'logout']);
+    Route::apiResource('admins',AdminController::class);
+    Route::get('/signout',[LoginController::class, 'logout']);
     Route::apiResource('stagiaires',StagiaireController::class);
     Route::apiResource('employes',EmployeController::class);             
     Route::apiResource('stages',StageController::class);
@@ -43,10 +44,11 @@ Route::group( ['middleware' => ['auth:admin','scope:admin'] ],function(){
     Route::apiResource('systemes',SystemeController::class);
     Route::apiResource('documents',DocumentController::class);
     Route::apiResource('postes',PosteController::class);
-    Route::apiResource('admins',AdminController::class);
+    Route::get('/employename/{id}',[EmployeController::class, 'getName']);
+    Route::get('/stagiairename/{id}',[StagiaireController::class, 'getName']);
     Route::get('/test', function()
 {
-return 'Hello World';
+return 'Admin';
 });
     });
 });
