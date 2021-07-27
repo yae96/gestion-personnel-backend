@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Avance;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AvanceController extends Controller
 {
@@ -70,7 +71,7 @@ class AvanceController extends Controller
     }
     public function employe(){
         $employe_id=auth()->user('employe')->id;
-        $avances=Avance::all()->where('employe_id',$employe_id);
+        $avances=DB::table('avances')->where('employe_id',$employe_id)->get();
         return $avances;
     }
 }

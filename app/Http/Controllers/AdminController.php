@@ -47,6 +47,8 @@ class AdminController extends Controller
         $admin->adresse=$request->adresse;
         if($request->avatar!=null)
         $admin->avatar=$request->avatar;
+        if($request->acces!=null)
+        $admin->acces=$request->acces;
         if($request->telephone!=null)
         $admin->telephone=$request->telephone;
         $admin->save();
@@ -96,6 +98,8 @@ public function find(){
         $admin->adresse=$request->adresse;
         if($request->avatar!=null)
         $admin->avatar=$request->avatar;
+        if($request->acces!=null)
+        $admin->acces=$request->acces;
         if($request->telephone!=null)
         $admin->telephone=$request->telephone;
         $admin->save();

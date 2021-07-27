@@ -7,6 +7,8 @@ use App\Http\Controllers\StageController;
 use App\Http\Controllers\StagiaireController;
 use App\Http\Controllers\AttestationController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\LoginController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,12 +19,12 @@ use App\Http\Controllers\DocumentController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |*/
 
-Route::group(['prefix' => 'employe'],function(){
+Route::group(['prefix' => 'stagiaire'],function(){
 
    //Route::post('sign-up','CustomerController@signUp');
 //unauthenticated routes for customers here  
 
-Route::group( ['middleware' => ['auth:employe','scope:employe'] ],function(){
+Route::group( ['middleware' => ['auth:stagiaire','scope:stagiaire'] ],function(){
       // authenticated customer routes here 
       Route::get('/attestations',[AttestationController::class, 'stagiaire']);
       Route::get('/signout',[LoginController::class, 'logout']);

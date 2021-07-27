@@ -10,6 +10,7 @@ use App\Http\Controllers\AvanceController;
 use App\Http\Controllers\CongeController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EmployeController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\GestionController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\PosteController;
@@ -28,7 +29,9 @@ use App\Http\Controllers\SystemeController;
 Route::group(['prefix' => 'admin'],function(){
 
 //unauthenticated routes for admins here  
-
+Route::get('/avatar/{name}',[FileController::class, 'avatarDownload']);
+Route::get('/cv/{name}',[FileController::class, 'cvDownload']);
+Route::apiResource('attestations',AttestationController::class);
 Route::group( ['middleware' => ['auth:admin','scope:admin'] ],function(){
        // authenticated admin routes here 
     Route::apiResource('admins',AdminController::class);
@@ -36,7 +39,7 @@ Route::group( ['middleware' => ['auth:admin','scope:admin'] ],function(){
     Route::apiResource('stagiaires',StagiaireController::class);
     Route::apiResource('employes',EmployeController::class);             
     Route::apiResource('stages',StageController::class);
-    Route::apiResource('attestations',AttestationController::class);
+  
     Route::apiResource('gestions',GestionController::class);
     Route::apiResource('conges',CongeController::class);
     Route::apiResource('paiements',PaiementController::class);
@@ -46,6 +49,9 @@ Route::group( ['middleware' => ['auth:admin','scope:admin'] ],function(){
     Route::apiResource('postes',PosteController::class);
     Route::get('/employename/{id}',[EmployeController::class, 'getName']);
     Route::get('/stagiairename/{id}',[StagiaireController::class, 'getName']);
+    Route::post('/avatar',[FileController::class, 'avatarUpload']);
+    Route::post('/cv',[FileController::class, 'cvUpload']);
+    Route::delete('/avatar/{name}',[FileController::class, 'avatarDelete']);
     Route::get('/test', function()
 {
 return 'Admin';

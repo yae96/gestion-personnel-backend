@@ -53,8 +53,8 @@ class StagiaireController extends Controller
         $stagiaire->avatar=$request->avatar;
         if($request->telephone!=null)
         $stagiaire->telephone=$request->telephone;
-        if($request->cv_fichier!=null)
-        $stagiaire->cv_fichier=$request->cv_fichier;
+        if($request->fichier_cv!=null)
+        $stagiaire->cv_fichier=$request->fichier_cv;
         $stagiaire->save();
         return $stagiaire;
     }
@@ -100,8 +100,8 @@ class StagiaireController extends Controller
         $stagiaire->avatar=$request->avatar;
         if($request->telephone!=null)
         $stagiaire->telephone=$request->telephone;
-        if($request->cv_fichier!=null)
-        $stagiaire->cv_fichier=$request->cv_fichier;
+        if($request->fichier_cv!=null)
+        $stagiaire->cv_fichier=$request->fichier_cv;
         $stagiaire->save();
         return $stagiaire;
     }

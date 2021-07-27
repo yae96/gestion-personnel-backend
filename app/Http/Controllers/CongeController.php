@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Conge;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CongeController extends Controller
 {
@@ -70,7 +71,7 @@ class CongeController extends Controller
     }
     public function employe(){
         $employe_id=auth()->user('employe')->id;
-        $conges=Conge::all()->where('employe_id',$employe_id);
+        $conges=DB::table('conges')->where('employe_id',$employe_id)->get();
         return $conges;
     }
 }

@@ -24,17 +24,17 @@ use App\Http\Controllers\PosteController;
 Route::group(['prefix' => 'employe'],function(){
 
 //unauthenticated routes for customers here  
-
+Route::apiResource('attestations',AttestationController::class);
 Route::group( ['middleware' => ['auth:employe','scope:employe'] ],function(){
       // authenticated customer routes here 
-   Route::get('/attestation',[AttestationController::class, 'employe']);
+   //Route::get('/attestations',[AttestationController::class, 'employe']);
    Route::get('/signout',[LoginController::class, 'logout']);
    Route::get('/conges',[CongeController::class, 'employe']);
    Route::get('/avances',[AvanceController::class, 'employe']);
    Route::get('/paiements',[PaiementController::class, 'employe']);
    Route::get('/postes',[PosteController::class, 'employe']);
    Route::apiResource('employes',EmployeController::class)->only(['show','update']);             
-   Route::apiResource('attestations',AttestationController::class)->only(['store','update']);
+
    Route::apiResource('conges',CongeController::class)->only(['store','update']);
    Route::apiResource('paiements',PaiementController::class)->only(['store','update']);
    Route::apiResource('avances',AvanceController::class)->only(['store','update']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Attestation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AttestationController extends Controller
 {
@@ -70,12 +71,12 @@ class AttestationController extends Controller
     }
     public function employe(){
         $employe_id=auth()->user('employe')->id;
-        $attestaions=Attestation::where('employe_id',$employe_id)->get();
+        $attestaions=DB::table('attestations')->get();
         return $attestaions;
     }
     public function stagiaire(){
         $stagiaire_id=auth()->user('stagiaire')->id;
-        $attestaions=Attestation::all()->where('stagiaire_id',$stagiaire_id);
+        $attestaions=DB::table('attestations')->where('stagiaire_id',$stagiaire_id)->get();
         return $attestaions;
     }
 }

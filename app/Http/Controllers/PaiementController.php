@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Paiement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PaiementController extends Controller
 {
@@ -70,7 +71,7 @@ class PaiementController extends Controller
     }
     public function employe(){
         $employe_id=auth()->user('employe')->id;
-        $paiements=Paiement::all()->where('employe_id',$employe_id);
+        $paiements=DB::table('paiements')->where('employe_id',$employe_id)->get();
         return $paiements;
     }
 }
